@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="es">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -54,63 +55,89 @@
             font-size: 0.9rem;
             color: #777;
         }
+
+        @media (max-width: 768px) {
+            #map {
+                height: 60vh;
+                /* Reducir altura en pantallas pequeñas */
+            }
+
+            h1 {
+                font-size: 1.5rem;
+                /* Ajustar tamaño del título */
+            }
+        }
+
+        @media (max-width: 480px) {
+            #map {
+                height: 50vh;
+                /* Altura aún menor en pantallas muy pequeñas */
+            }
+
+            h1 {
+                font-size: 1.2rem;
+                /* Reducir tamaño del título aún más */
+            }
+        }
     </style>
 </head>
+
 <body>
 
-<h1>Mapa de Comercios de Palma</h1>
-<div id="map"></div>
+    <h1>Mapa de Comercios de Palma</h1>
+    <div id="map"></div>
 
-<footer>
-    <p>Mapa interactivo de PalmaActiva | Campaña Parking gratuito 2024</p>
-</footer>
+    <footer>
+        <p>Mapa interactivo de PalmaActiva | Campaña Parking gratuito 2024</p>
+    </footer>
 
-<script src="https://unpkg.com/leaflet/dist/leaflet.js"></script>
-<script>
-    const map = L.map('map').setView([39.5696, 2.6502], 14);
+    <script src="https://unpkg.com/leaflet/dist/leaflet.js"></script>
+    <script>
+        const map = L.map('map').setView([39.5696, 2.6502], 14);
 
-    // Usar capa base de OpenStreetMap
-    L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
-        attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
-    }).addTo(map);
+        // Usar capa base de OpenStreetMap
+        L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+            attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
+        }).addTo(map);
 
-    const customIcon = L.icon({
-        iconUrl: 'https://cdn-icons-png.flaticon.com/512/846/846449.png',
-        iconSize: [40, 40], 
-        iconAnchor: [20, 40], 
-        popupAnchor: [0, -40] 
-    });
+        const customIcon = L.icon({
+            iconUrl: 'https://cdn-icons-png.flaticon.com/512/846/846449.png',
+            iconSize: [40, 40],
+            iconAnchor: [20, 40],
+            popupAnchor: [0, -40]
+        });
 
-    const comercios = [
-        { nombre: 'Carmen Emilse Alfonso Torres', lat: 39.5743, lng: 2.6489, direccion: '07400' },
-        { nombre: 'MIRO JEWELRY', lat: 39.5700, lng: 2.6501, direccion: 'Sindicat, 3 07002' },
-        { nombre: 'HI Logistic', lat: 39.5721, lng: 2.6485, direccion: 'Calle Manacor 34' },
-        { nombre: 'Bombonería Leonidas', lat: 39.5725, lng: 2.6542, direccion: 'Passatge Santa Catalina de Sena, 3' },
-        { nombre: 'CAFE BARROCO', lat: 39.5708, lng: 2.6554, direccion: 'C/MARGALIDA CAIMARI, 17, 07005' },
-        { nombre: 'FILATO', lat: 39.5702, lng: 2.6508, direccion: 'C/DE LA UNIÓ, 13. 07001' },
-        { nombre: 'Restaurante Can Pelut', lat: 39.5678, lng: 2.6450, direccion: 'Avd. Ingeniero Gabriel Roca 29, 07014 Palma' },
-        { nombre: 'Carnicería Mateo Garau', lat: 39.5736, lng: 2.6510, direccion: 'Mercado olivar 23' },
-        { nombre: 'Aladino', lat: 39.5704, lng: 2.6549, direccion: 'Plz Paris 7' },
-        { nombre: 'BOTONS', lat: 39.5688, lng: 2.6497, direccion: 'C/ FERRERIA 8 07002 PALMA' },
-        { nombre: 'PASATIEMPOS', lat: 39.5705, lng: 2.6509, direccion: 'C/ COSTA D’EN BROSSA 16' },
-        { nombre: 'FORN CA NA CATI', lat: 39.5692, lng: 2.6498, direccion: 'PLAZA DE CORT, 2' },
-        { nombre: 'TRESS CONCEPT STORE', lat: 39.5760, lng: 2.6420, direccion: 'C/ BAUZA, 10' },
-        { nombre: 'PELUQUERIA CARJU', lat: 39.5697, lng: 2.6465, direccion: 'C/ FONT I MONTEROS, 10' },
-        { nombre: 'BOUTIQUE DEL GELATO', lat: 39.5689, lng: 2.6523, direccion: 'C/ CONCHA ESPINA, 23' },
-        { nombre: 'CORTINAS QUINTANA', lat: 39.5721, lng: 2.6512, direccion: 'C/ CIRUGIANS I BARBERS, 25' },
-        { nombre: 'CALZADOS HEYMO', lat: 39.5782, lng: 2.6458, direccion: 'C/ SASTRES,12' },
-        { nombre: 'ONES', lat: 39.5790, lng: 2.6492, direccion: 'C/ ALMIRANTE CERVERA, 16' },
-        { nombre: 'XINO’S', lat: 39.5715, lng: 2.6493, direccion: 'C/ JAUME II, 5' }
-    ];
+        const comercios = [
+            { nombre: 'Carmen Emilse Alfonso Torres', lat: 39.5743, lng: 2.6489, direccion: '07400' },
+            { nombre: 'MIRO JEWELRY', lat: 39.5700, lng: 2.6501, direccion: 'Sindicat, 3 07002' },
+            { nombre: 'HI Logistic', lat: 39.5721, lng: 2.6485, direccion: 'Calle Manacor 34' },
+            { nombre: 'Bombonería Leonidas', lat: 39.5725, lng: 2.6542, direccion: 'Passatge Santa Catalina de Sena, 3' },
+            { nombre: 'CAFE BARROCO', lat: 39.5708, lng: 2.6554, direccion: 'C/MARGALIDA CAIMARI, 17, 07005' },
+            { nombre: 'FILATO', lat: 39.5702, lng: 2.6508, direccion: 'C/DE LA UNIÓ, 13. 07001' },
+            { nombre: 'Restaurante Can Pelut', lat: 39.5678, lng: 2.6450, direccion: 'Avd. Ingeniero Gabriel Roca 29, 07014 Palma' },
+            { nombre: 'Carnicería Mateo Garau', lat: 39.5736, lng: 2.6510, direccion: 'Mercado olivar 23' },
+            { nombre: 'Aladino', lat: 39.5704, lng: 2.6549, direccion: 'Plz Paris 7' },
+            { nombre: 'BOTONS', lat: 39.5688, lng: 2.6497, direccion: 'C/ FERRERIA 8 07002 PALMA' },
+            { nombre: 'PASATIEMPOS', lat: 39.5705, lng: 2.6509, direccion: 'C/ COSTA D’EN BROSSA 16' },
+            { nombre: 'FORN CA NA CATI', lat: 39.5692, lng: 2.6498, direccion: 'PLAZA DE CORT, 2' },
+            { nombre: 'TRESS CONCEPT STORE', lat: 39.5760, lng: 2.6420, direccion: 'C/ BAUZA, 10' },
+            { nombre: 'PELUQUERIA CARJU', lat: 39.5697, lng: 2.6465, direccion: 'C/ FONT I MONTEROS, 10' },
+            { nombre: 'BOUTIQUE DEL GELATO', lat: 39.5689, lng: 2.6523, direccion: 'C/ CONCHA ESPINA, 23' },
+            { nombre: 'CORTINAS QUINTANA', lat: 39.5721, lng: 2.6512, direccion: 'C/ CIRUGIANS I BARBERS, 25' },
+            { nombre: 'CALZADOS HEYMO', lat: 39.5782, lng: 2.6458, direccion: 'C/ SASTRES,12' },
+            { nombre: 'ONES', lat: 39.5790, lng: 2.6492, direccion: 'C/ ALMIRANTE CERVERA, 16' },
+            { nombre: 'XINO’S', lat: 39.5715, lng: 2.6493, direccion: 'C/ JAUME II, 5' }
+        ];
 
-    comercios.forEach(comercio => {
-        const marker = L.marker([comercio.lat, comercio.lng], { icon: customIcon }).addTo(map);
-        marker.bindPopup(`
+        comercios.forEach(comercio => {
+            const marker = L.marker([comercio.lat, comercio.lng], { icon: customIcon }).addTo(map);
+            marker.bindPopup(`
             <h3>${comercio.nombre}</h3>
             <p><strong>Dirección:</strong> ${comercio.direccion}</p>
         `);
-    });
-</script>
+        });
+    </script>
 
 </body>
+
 </html>
